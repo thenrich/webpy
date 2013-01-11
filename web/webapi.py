@@ -300,7 +300,7 @@ def rawinput(method=None):
                 a = ctx.get('_fieldstorage')
                 if not a:
                     fp = e['wsgi.input']
-                    a = cgi.FieldStorage(fp=fp, environ=e, keep_blank_values=1)
+                    a = cgi.FieldStorage(fp=StringIO(fp.read(int(e['CONTENT_LENGTH']))), environ=e, keep_blank_values=1)
                     ctx._fieldstorage = a
             else:
                 fp = StringIO(data())
